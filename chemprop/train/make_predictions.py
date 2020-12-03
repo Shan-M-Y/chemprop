@@ -8,6 +8,7 @@ from .predict import predict
 from chemprop.args import PredictArgs, TrainArgs
 from chemprop.data import get_data, get_data_from_smiles, MoleculeDataLoader, MoleculeDataset
 from chemprop.utils import load_args, load_checkpoint, load_scalers, makedirs, timeit
+from chemprop.features import set_extra_atom_fdim
 
 
 @timeit()
@@ -23,6 +24,7 @@ def make_predictions(args: PredictArgs, smiles: List[List[str]] = None) -> List[
     :param smiles: List of list of SMILES to make predictions on.
     :return: A list of lists of target predictions.
     """
+
     print('Loading training args')
     train_args = load_args(args.checkpoint_paths[0])
     num_tasks, task_names = train_args.num_tasks, train_args.task_names
@@ -40,6 +42,8 @@ def make_predictions(args: PredictArgs, smiles: List[List[str]] = None) -> List[
         if not hasattr(args, key):
             setattr(args, key, value)
     args: Union[PredictArgs, TrainArgs]
+
+    set_extra_atom_fdim(train_args.atom_features_size)
 
     print('Loading data')
     if smiles is not None:
