@@ -109,6 +109,7 @@ def load_valid_atom_features(path: str, smiles: List[str]) -> List[np.ndarray]:
         features_df = features_df.apply(lambda x: truncate_arrays(x), axis=1)
 
         features = features_df.apply(lambda x: np.stack(x.tolist(), axis=1), axis=1).tolist()
+        
     else:
         raise ValueError(f'Extension "{extension}" is not supported.')
 
