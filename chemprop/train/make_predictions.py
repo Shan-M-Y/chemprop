@@ -43,7 +43,8 @@ def make_predictions(args: PredictArgs, smiles: List[List[str]] = None) -> List[
             setattr(args, key, value)
     args: Union[PredictArgs, TrainArgs]
 
-    set_extra_atom_fdim(train_args.atom_features_size)
+    if args.atom_descriptors == 'feature':
+        set_extra_atom_fdim(train_args.atom_features_size)
 
     print('Loading data')
     if smiles is not None:
