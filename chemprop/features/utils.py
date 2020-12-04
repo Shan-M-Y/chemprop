@@ -112,7 +112,4 @@ def load_valid_atom_features(path: str, smiles: List[str]) -> List[np.ndarray]:
     else:
         raise ValueError(f'Extension "{extension}" is not supported.')
 
-    else:
-        raise ValueError(f'Extension "{extension}" is not supported.')
-
     return features
