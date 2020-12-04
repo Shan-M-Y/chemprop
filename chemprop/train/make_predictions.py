@@ -24,7 +24,6 @@ def make_predictions(args: PredictArgs, smiles: List[List[str]] = None) -> List[
     :param smiles: List of list of SMILES to make predictions on.
     :return: A list of lists of target predictions.
     """
-
     print('Loading training args')
     train_args = load_args(args.checkpoint_paths[0])
     num_tasks, task_names = train_args.num_tasks, train_args.task_names
